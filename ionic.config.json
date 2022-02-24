@@ -1,0 +1,7 @@
+{
+  "name": "tca-scrabbling",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
