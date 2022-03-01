@@ -1,8 +1,8 @@
 import React, { useRef } from "react";
-import { IonButton, IonPage, IonApp, IonHeader, IonContent, IonCard, IonLabel, IonToolbar, IonButtons, IonBackButton, IonInput } from "@ionic/react";
-import { RouteComponentProps } from "react-router";
+import { IonButton, IonPage, IonApp, IonHeader, IonContent, IonCard, IonLabel, IonToolbar, IonButtons, IonBackButton, IonInput, IonCardContent, IonCardHeader } from "@ionic/react";
 
-const PlayGame: React.FC<RouteComponentProps> = (props) => {
+
+const PlayGame: React.FC = () => {
     const pageRef = useRef();
     return (
         <IonPage ref={pageRef}>
@@ -16,25 +16,28 @@ const PlayGame: React.FC<RouteComponentProps> = (props) => {
                         <h1>Let's Get Scrabbling!</h1>
                 </IonHeader>
                 <IonContent>
-                   
                     <IonButton>Start Game</IonButton>
                     <IonCard>
-                    <h1>Player 1: Me</h1>
+                    <IonCardContent>
+                        <IonCardHeader>Player 1: Me</IonCardHeader>
                     <IonLabel>Score:</IonLabel>
                     <IonInput type="number" placeholder="Enter Score"></IonInput>
                     <IonButtons>
                     <IonButton>End Turn</IonButton>
                     </IonButtons>
+                    </IonCardContent>
                     </IonCard>
                     <IonCard>
-                    <h1>Player 2: </h1>
+                    <IonCardContent>
+                        <IonCardHeader className='ion-paddng-left' >Player 2:</IonCardHeader> 
                     <IonLabel>Score:</IonLabel>
                     <IonButtons>
                     <IonButton>EndTurn</IonButton>
                     </IonButtons>
+                    </IonCardContent>
                     </IonCard>
-                    <IonButton onClick={() => props.history.push('/home')}>Quit Game</IonButton>
-                    <IonButton onClick={() => props.history.push('/home')} >End Game</IonButton>
+                    <IonButton routerLink='/home'>Quit Game</IonButton>
+                    <IonButton routerLink='/home' >End Game</IonButton>
                 </IonContent>
             </IonApp>
         </IonPage>

@@ -1,10 +1,12 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
 import { IonApp, IonRouterOutlet, setupIonicReact } from '@ionic/react';
-import { IonReactRouter } from '@ionic/react-router';
+import { IonReactRouter, IonReactHashRouter } from '@ionic/react-router';
 import Home from './pages/Home';
 import Players from './pages/Players';
 import PlayGame from './pages/PlayGame';
+
+import {useState} from 'react';
 
 
 
@@ -31,15 +33,17 @@ setupIonicReact();
 
 const App: React.FC = () => (
   <IonApp>
-    <IonReactRouter>
+    <IonReactHashRouter>
       <IonRouterOutlet>
-        <Route path="/home" component={Home} />
-        <Route path="/players" component={Players} />
-        <Route path="/playgame" component={PlayGame} />
-        {/* <Route path="../images/scrabbling.jpg" component={scrabbling} /> */}
+        <Route exact path="/home" component={Home} />
+        <Home />
+        <Route exact path="/players" component={Players} />
+        <Players />
+        <Route exact path="/playgame" component={PlayGame} />
+        <PlayGame />
         <Redirect exact from="/" to="/home" />
       </IonRouterOutlet>
-    </IonReactRouter>
+    </IonReactHashRouter>
   </IonApp>
 );
 

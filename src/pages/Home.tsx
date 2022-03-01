@@ -1,10 +1,9 @@
 import { IonApp, IonButton, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonContent, IonHeader, IonImg, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import './Home.css';
 import React from 'react';
-import { RouteComponentProps } from 'react-router';
 import scrabbling from '../components/scrabbling.jpg';
 
-const Home: React.FC<RouteComponentProps> = (props) => {
+const Home: React.FC = () => {
   return (
     <IonPage>
       <IonApp>
@@ -13,11 +12,11 @@ const Home: React.FC<RouteComponentProps> = (props) => {
           <IonTitle className='ion-text-center' >SCRABBLING</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent>
+      <IonContent fullscreen>
       <IonImg src={scrabbling} className='ion-padding' alt='scrabble game'></IonImg>
         <IonCard> 
           <IonCardHeader className='ion-text-center' >Start New Game Below</IonCardHeader>
-          <IonButton  onClick={() => props.history.push('/Players')}>New Game</IonButton>
+          <IonButton  routerLink='/players'>New Game</IonButton>
           <IonCardTitle>
             Stats
           </IonCardTitle>

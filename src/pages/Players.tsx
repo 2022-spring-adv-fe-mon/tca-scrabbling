@@ -1,9 +1,9 @@
 import { IonApp, IonBackButton, IonButton, IonButtons, IonCard, IonCheckbox, IonContent, IonHeader, IonItem, IonLabel, IonList, IonPage, IonTitle, IonToolbar } from "@ionic/react";
 import React, { useRef } from "react";
-import { RouteComponentProps } from "react-router";
 
 
-const Players: React.FC<RouteComponentProps> = (props) => {
+
+const Players: React.FC = () => {
     const pageRef = useRef();
     return (
         <IonPage ref={pageRef}>
@@ -28,8 +28,8 @@ const Players: React.FC<RouteComponentProps> = (props) => {
                         </IonItem>
                     </IonList>
                     </IonCard>
-                    <IonButton onClick={() => props.history.push('/playgame')} >Continue</IonButton>
-                    <IonButton onClick={() => props.history.push('/home')} >Cancel</IonButton>
+                    <IonButton routerLink='/playgame' >Continue</IonButton>
+                    <IonButton routerLink='/home' >Cancel</IonButton>
                 </IonContent>
             </IonApp>
         </IonPage>
