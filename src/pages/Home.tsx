@@ -1,42 +1,77 @@
-import { IonApp, IonButton, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonContent, IonHeader, IonImg, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import './Home.css';
-import React from 'react';
-import scrabbling from '../components/scrabbling.jpg';
+import {
+  IonApp,
+  IonButton,
+  IonCard,
+  IonCardHeader,
+  IonCardTitle,
+  IonContent,
+  IonHeader,
+  IonImg,
+  IonPage,
+  IonTitle,
+  IonToolbar,
+} from "@ionic/react";
+import "./Home.css";
 
-const Home: React.FC = () => {
+import scrabbling from "../components/scrabbling.jpg";
+import { gameResult } from "../App";
+
+interface HomeProps {
+  gameResults: gameResult[]
+}
+
+const Home: React.FC <HomeProps> = ({gameResults}) => {
   return (
     <IonPage>
       <IonApp>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle className='ion-text-center' >SCRABBLING</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent fullscreen>
-      <IonImg src={scrabbling} className='ion-padding' alt='scrabble game'></IonImg>
-        <IonCard> 
-          <IonCardHeader className='ion-text-center' >Start New Game Below</IonCardHeader>
-          <IonButton  routerLink='/players'>New Game</IonButton>
-          <IonCardTitle>
-            Stats
-          </IonCardTitle>
+        <IonHeader>
+          <IonToolbar>
+            <IonTitle className="ion-text-center">SCRABBLING</IonTitle>
+          </IonToolbar>
+        </IonHeader>
+        <IonContent fullscreen>
+          <IonImg
+            src={scrabbling}
+            className="ion-padding"
+            alt="scrabble game"
+          ></IonImg>
           <IonCard>
-           <IonCardHeader className='ion-text-center' >Leader Board</IonCardHeader>
+            <IonButton className='ion-padding' routerLink='players'>New Game</IonButton>
+            <IonCardTitle className='ion-padding'>Stats</IonCardTitle>
+            <IonCard>
+              <IonCardHeader className="ion-text-center">
+                <h3>
+                Total Games Played: {gameResults.length}
+                </h3>
+              </IonCardHeader>
+            </IonCard>
+            <IonCard>
+              <IonCardHeader className="ion-text-center">
+                Leader Board
+              </IonCardHeader>
+            </IonCard>
+            <IonCard>
+              <IonCardHeader className="ion-text-center">
+                Longest Game
+              </IonCardHeader>
+            </IonCard>
+            <IonCard>
+              <IonCardHeader className="ion-text-center">
+                Shortest Game
+              </IonCardHeader>
+            </IonCard>
+            <IonCard>
+              <IonCardHeader className="ion-text-center">
+                Fastest Word Played
+              </IonCardHeader>
+            </IonCard>
+            <IonCard>
+              <IonCardHeader className="ion-text-center">
+                Highest Word Score
+              </IonCardHeader>
+            </IonCard>
           </IonCard>
-          <IonCard>
-            <IonCardHeader className='ion-text-center' >Longest Game</IonCardHeader>
-          </IonCard>
-          <IonCard>
-            <IonCardHeader className='ion-text-center' >Shortest Game</IonCardHeader>
-          </IonCard>
-          <IonCard>
-            <IonCardHeader className='ion-text-center' >Fastest Word Played</IonCardHeader>
-          </IonCard>
-          <IonCard>
-            <IonCardHeader className='ion-text-center'>Highest Word Score</IonCardHeader>
-          </IonCard>
-        </IonCard>
-      </IonContent>
+        </IonContent>
       </IonApp>
     </IonPage>
   );
