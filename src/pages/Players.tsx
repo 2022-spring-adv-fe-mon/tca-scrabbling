@@ -22,7 +22,7 @@ import { useHistory } from "react-router";
 import AddPlayerModal from "../components/AddPlayerModal";
 import { currentGame } from "../App";
 
-interface AddPlayerProps {
+export interface AddPlayerProps {
   previousPlayers: string[];
   setCurrentGame: (game: currentGame) => void;
 }
@@ -37,20 +37,7 @@ const Players: React.FC<AddPlayerProps> = ({
   const playersWithCheckBoolean = previousPlayers.map(x => ({
     name: x
     , checked: false
-  }))
-
-  const startGame = () => {
-
-    setCurrentGame({
-      start: new Date().toISOString()
-      , players: [
-        previousPlayers[0]
-        , previousPlayers[1]
-        ,"Marge"
-      ]
-    });
-    nav.push('/playgame');
-  };
+  }));
 
   //track modal state
   const [addPlayerModal, setAddPlayerModal] = useState(false);
