@@ -63,8 +63,9 @@ const Players: React.FC<AddPlayerProps> = ({
   } | null>(null);
 
   const onModalClose = (response: any) => {
+    console.log(response);
     setAddPlayerModal(false);
-    setModalResp(response);
+    // setModalResp(response);
     if (!response.cancelled) {
       setPlayer({ name: response.data.name });
     }
@@ -85,13 +86,11 @@ const Players: React.FC<AddPlayerProps> = ({
             <IonCardTitle className="ion-padding">Players</IonCardTitle>
             <IonCardSubtitle className='ion-padding'>Select or Add Player</IonCardSubtitle>
             <IonCardContent className="ion-padding">
-              {addPlayerModal && (
-                <AddPlayerModal
-                  isOpen={addPlayerModal}
-                  initialData={{ ...player }}
-                  onClose={onModalClose}
-                />
-              )}
+            <AddPlayerModal
+              isOpen={addPlayerModal}
+              initialData={{ ...player }}
+              onClose={onModalClose}
+            />
               <div>
                 {
                 playersWithCheckBoolean.map(x => <p key={x.name}>{x.name} ({x.checked.toString()})</p>)
