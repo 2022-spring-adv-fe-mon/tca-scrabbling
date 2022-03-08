@@ -106,6 +106,8 @@ const App: React.FC = () => {
         
         <Route exact path='/playgame'>
           <PlayGame 
+            previousPlayers={getUniquePlayers(results)}
+            setCurrentGame={setCurrentGame}
             addGameResult={addGameResult}
             currentGame={currentGame}
           />

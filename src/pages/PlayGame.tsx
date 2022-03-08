@@ -15,20 +15,36 @@ import {
   IonTitle,
 } from "@ionic/react";
 import { currentGame, gameResult } from "../App";
-import { useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router';
 
 interface PlayGameProps {
   addGameResult: (r: gameResult) => void;
   currentGame: currentGame;
+  previousPlayers: string[];
+  setCurrentGame: (game: currentGame) => void;
 }
 
 const PlayGame: React.FC<PlayGameProps> = ({
   addGameResult
   , currentGame
+  , previousPlayers
+  , setCurrentGame
 
 }) => {
 
-  const history = useHistory();
+  const nav = useHistory();
+
+  const startGame = () => {
+    // Setup the payers and the start timestamp.
+    setCurrentGame({
+      start: new Date().toISOString()
+      , players: [
+        previousPlayers[0] 
+        , previousPlayers[1]
+        , "Marge"
+      ]
+    });
+  };
 
   const endGame = () => {
 
@@ -42,7 +58,7 @@ const PlayGame: React.FC<PlayGameProps> = ({
       , winner: "Marge"
     });
 
-    history.push("/");
+    nav.push("/");
   };
 
   return (
@@ -59,7 +75,7 @@ const PlayGame: React.FC<PlayGameProps> = ({
         </IonHeader>
         <IonContent>
         <h1 className="ion-padding">Let's Get Scrabbling!</h1>
-          <IonButton className="ion-padding">Start Game</IonButton>
+          <IonButton className="ion-padding" onClick={startGame}>Start Game</IonButton>
           <IonCard>
             <IonCardContent>
               <IonCardHeader>Player 1: Me</IonCardHeader>
