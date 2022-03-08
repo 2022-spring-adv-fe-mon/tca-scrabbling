@@ -17,28 +17,56 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
+import { useHistory } from "react-router";
 import AddPlayerModal from "../components/AddPlayerModal";
 
-const Players: React.FC = () => {
-  //track modal state
-  const [addPlayerModal, setAddPlayerModal] = useState(false);
-  //track state of player
-  const [player, setPlayer] = useState({ name: "Chris" });
-  //tracks state of modal response
-  const [modalResp, setModalResp] = useState<{
-    cancelled: boolean;
-    data: any;
-  } | null>(null);
+interface AddPlayerProps {
+  previousPlayers: string[];
+  setCurrentGame: (game: currentGame) => void;
+}
 
-  const onModalClose = (response: any) => {
-    setAddPlayerModal(false);
-    setModalResp(response);
-    if (!response.cancelled) {
-      setPlayer({ name: response.data.name });
-    }
+const Players: React.FC<AddPlayerProps> = ({
+  previousPlayers
+  , setCurrentGame
+}) => {
+
+  const nav = useHistory();
+
+  const playersWithCheckBoolean = previousPlayers.map(x => ({
+    name: x
+    , checked: false
+  }))
+
+  const startGame = () => {
+    setCurrentGame({
+      start: new Date().toISOString()
+      , players: [
+        previousPlayers[0]
+        , previousPlayers[1]
+        ,"Marge"
+      ]
+    });
+    nav.push('/playgame');
   };
-  const pageRef = useRef();
+
+  // //track modal state
+  // const [addPlayerModal, setAddPlayerModal] = useState(false);
+  // //track state of player
+  // const [player, setPlayer] = useState({ name: "Chris" });
+  // //tracks state of modal response
+  // const [modalResp, setModalResp] = useState<{
+  //   cancelled: boolean;
+  //   data: any;
+  // } | null>(null);
+
+  // const onModalClose = (response: any) => {
+  //   setAddPlayerModal(false);
+  //   setModalResp(response);
+  //   if (!response.cancelled) {
+  //     setPlayer({ name: response.data.name });
+  //   }
+  // };
   return (
     <IonApp>
       <IonPage>

@@ -20,6 +20,29 @@ interface HomeProps {
   gameResults: gameResult[]
 }
 
+// const calculateWinningPercentage = (results: gameResult[], who: string) => (
+//   results.filter(x => x.winner === who).length 
+//   / results.filter(
+//       x => 
+//           x.winner !== "~~None~~" 
+//           && x.players.some(
+//               y => y.name === who
+//           )
+//       ).length
+// );
+const calculateLongestGame = (r: gameResult[]) => (
+  Math.max(
+      ...r.map(x => Date.parse(x.end) - Date.parse(x.start))
+  )
+);
+
+const calculateShortestGame = (r: gameResult[]) => (
+  Math.min(
+    ...r.map(x => Date.parse(x.end) - Date.parse(x.start))
+  )
+);
+
+
 const Home: React.FC <HomeProps> = ({gameResults}) => {
   return (
     <IonPage>
@@ -52,12 +75,14 @@ const Home: React.FC <HomeProps> = ({gameResults}) => {
             </IonCard>
             <IonCard>
               <IonCardHeader className="ion-text-center">
-                Longest Game
+                Longest Game (min): {calculateLongestGame(gameResults) / 1000 / 60}
               </IonCardHeader>
             </IonCard>
             <IonCard>
               <IonCardHeader className="ion-text-center">
-                Shortest Game
+                <h3>
+                Shortest Game (min): {calculateShortestGame(gameResults) / 1000 / 60}
+                </h3>
               </IonCardHeader>
             </IonCard>
             <IonCard>
