@@ -30,7 +30,7 @@ const AddPlayerModal: React.FC<{
     initialData.name
   );
 
-const [inputValue, setInputValue] = useState();
+// const [inputValue, setInputValue] = useState();
   return (
     <IonModal isOpen={isOpen}>
       <IonHeader>
