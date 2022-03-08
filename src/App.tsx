@@ -42,6 +42,11 @@ export interface gameResult {
   players: player []
 }
 
+export interface currentGame {
+  start: string;
+  players: string[];
+}
+
 const game1: gameResult = {
   start: "2022-02-14T18:55:00"
   , end: "2022-02-14T19:00:00"
@@ -61,9 +66,17 @@ const gameResults: gameResult[] = [
   , game2
 ];
 
+const getUniquePlayers = (games: gameResult[]) => (
+  [...new Set(games.flatMap(x=> x.players.map(y => y.name)))]
+);
+
 const App: React.FC = () => {
 
-  const [results, setResults] = useState(gameResults);
+  const [results, setResults] = useState<gameResult[]>(gameResults);
+  const [currentGame, setCurrentGame] = useState<currentGame>({
+    start: ""
+    , players: []
+  });
 
   const addGameResult = (singleGameResult: gameResult) => {
     setResults([
@@ -71,7 +84,7 @@ const App: React.FC = () => {
       , singleGameResult
     ]);
   };
-  
+
   return (
   <IonApp>
     <IonReactHashRouter>
@@ -85,12 +98,16 @@ const App: React.FC = () => {
         </Route>
         
         <Route exact path='/players'>
-          <Players />
+          <Players 
+            previousPlayers={getUniquePlayers(results)}
+            setCurrentGame={setCurrentGame}
+          />
         </Route>
         
         <Route exact path='/playgame'>
           <PlayGame 
             addGameResult={addGameResult}
+            currentGame={currentGame}
           />
         </Route>
     </IonReactHashRouter>

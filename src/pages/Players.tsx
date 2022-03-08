@@ -20,6 +20,7 @@ import {
 import React, { useState } from "react";
 import { useHistory } from "react-router";
 import AddPlayerModal from "../components/AddPlayerModal";
+import { currentGame } from "../App";
 
 interface AddPlayerProps {
   previousPlayers: string[];
@@ -39,6 +40,7 @@ const Players: React.FC<AddPlayerProps> = ({
   }))
 
   const startGame = () => {
+
     setCurrentGame({
       start: new Date().toISOString()
       , players: [
@@ -50,23 +52,23 @@ const Players: React.FC<AddPlayerProps> = ({
     nav.push('/playgame');
   };
 
-  // //track modal state
-  // const [addPlayerModal, setAddPlayerModal] = useState(false);
-  // //track state of player
-  // const [player, setPlayer] = useState({ name: "Chris" });
-  // //tracks state of modal response
-  // const [modalResp, setModalResp] = useState<{
-  //   cancelled: boolean;
-  //   data: any;
-  // } | null>(null);
+  //track modal state
+  const [addPlayerModal, setAddPlayerModal] = useState(false);
+  //track state of player
+  const [player, setPlayer] = useState({ name: "Chris" });
+  //tracks state of modal response
+  const [modalResp, setModalResp] = useState<{
+    cancelled: boolean;
+    data: any;
+  } | null>(null);
 
-  // const onModalClose = (response: any) => {
-  //   setAddPlayerModal(false);
-  //   setModalResp(response);
-  //   if (!response.cancelled) {
-  //     setPlayer({ name: response.data.name });
-  //   }
-  // };
+  const onModalClose = (response: any) => {
+    setAddPlayerModal(false);
+    setModalResp(response);
+    if (!response.cancelled) {
+      setPlayer({ name: response.data.name });
+    }
+  };
   return (
     <IonApp>
       <IonPage>
@@ -75,10 +77,9 @@ const Players: React.FC<AddPlayerProps> = ({
             <IonButtons slot="start">
               <IonBackButton defaultHref="/home" />
             </IonButtons>
-            <IonTitle>Select Players</IonTitle>
+            <IonTitle>Back To Home</IonTitle>
           </IonToolbar>
         </IonHeader>
-
         <IonContent>
           <IonCard className="ion-padding">
             <IonCardTitle className="ion-padding">Players</IonCardTitle>
@@ -92,6 +93,9 @@ const Players: React.FC<AddPlayerProps> = ({
                 />
               )}
               <div>
+                {
+                playersWithCheckBoolean.map(x => <p key={x.name}>{x.name} ({x.checked.toString()})</p>)
+                }
                 <IonList>
                         <IonItem>
                             <IonCheckbox slot="start" />

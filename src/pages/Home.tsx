@@ -38,7 +38,7 @@ const calculateLongestGame = (r: gameResult[]) => (
 
 const calculateShortestGame = (r: gameResult[]) => (
   Math.min(
-    ...r.map(x => Date.parse(x.end) - Date.parse(x.start))
+      ...r.map(x => Date.parse(x.end) - Date.parse(x.start))
   )
 );
 
@@ -75,7 +75,9 @@ const Home: React.FC <HomeProps> = ({gameResults}) => {
             </IonCard>
             <IonCard>
               <IonCardHeader className="ion-text-center">
+                <h3>
                 Longest Game (min): {calculateLongestGame(gameResults) / 1000 / 60}
+                </h3>
               </IonCardHeader>
             </IonCard>
             <IonCard>
