@@ -22,21 +22,17 @@ import { useHistory } from "react-router";
 import AddPlayerModal from "../components/AddPlayerModal";
 import { currentGame } from "../App";
 
-export interface AddPlayerProps {
+interface AddPlayerProps {
   previousPlayers: string[];
   setCurrentGame: (game: currentGame) => void;
 }
 
-const Players: React.FC<AddPlayerProps> = ({
-  previousPlayers
-  , setCurrentGame
-}) => {
-
+const Players: React.FC<AddPlayerProps> = ({ previousPlayers }) => {
   const nav = useHistory();
 
-  const playersWithCheckBoolean = previousPlayers.map(x => ({
-    name: x
-    , checked: false
+  const playersWithCheckBoolean = previousPlayers.map((x) => ({
+    name: x,
+    checked: false,
   }));
 
   //track modal state
@@ -44,14 +40,13 @@ const Players: React.FC<AddPlayerProps> = ({
   //track state of player
   const [player, setPlayer] = useState({ name: "Chris" });
   //tracks state of modal response
-  const [modalResp, setModalResp] = useState<{
+  const [modalResp] = useState<{
     cancelled: boolean;
     data: any;
   } | null>(null);
 
   const onModalClose = (response: any) => {
     setAddPlayerModal(false);
-    setModalResp(response);
     if (!response.cancelled) {
       setPlayer({ name: response.data.name });
     }
@@ -70,28 +65,31 @@ const Players: React.FC<AddPlayerProps> = ({
         <IonContent>
           <IonCard className="ion-padding">
             <IonCardTitle className="ion-padding">Players</IonCardTitle>
-            <IonCardSubtitle className='ion-padding'>Select or Add Player</IonCardSubtitle>
+            <IonCardSubtitle className="ion-padding">
+              Select or Add Player
+            </IonCardSubtitle>
             <IonCardContent className="ion-padding">
-              {addPlayerModal && (
-                <AddPlayerModal
-                  isOpen={addPlayerModal}
-                  initialData={{ ...player }}
-                  onClose={onModalClose}
-                />
-              )}
+              <AddPlayerModal
+                isOpen={addPlayerModal}
+                initialData={{ ...player }}
+                onClose={onModalClose}
+              />
+
               <div>
-                {
-                playersWithCheckBoolean.map(x => <p key={x.name}>{x.name} ({x.checked.toString()})</p>)
-                }
+                {playersWithCheckBoolean.map((x) => (
+                  <p key={x.name}>
+                    {x.name} ({x.checked.toString()})
+                  </p>
+                ))}
                 <IonList>
-                        <IonItem>
-                            <IonCheckbox slot="start" />
-                            <IonLabel>Me</IonLabel>
-                        </IonItem>
-                <IonItem>
-                <IonCheckbox slot="start" />
+                  <IonItem>
+                    <IonCheckbox slot="start" />
+                    <IonLabel>Me</IonLabel>
+                  </IonItem>
+                  <IonItem>
+                    <IonCheckbox slot="start" />
                     <IonLabel>{player.name}</IonLabel>
-                </IonItem>
+                  </IonItem>
                 </IonList>
                 <div>
                   <pre>{modalResp && JSON.stringify(modalResp, null, 2)}</pre>
@@ -106,9 +104,11 @@ const Players: React.FC<AddPlayerProps> = ({
               </IonButton>
             </IonCardContent>
           </IonCard>
-                <div className='ion-padding'>
-          <IonButton routerLink="/playgame">Continue</IonButton>
-          <IonButton routerLink="/home" color="danger">Cancel</IonButton>
+          <div className="ion-padding">
+            <IonButton routerLink="/playgame">Continue</IonButton>
+            <IonButton routerLink="/home" color="danger">
+              Cancel
+            </IonButton>
           </div>
         </IonContent>
       </IonPage>

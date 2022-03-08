@@ -15,7 +15,7 @@ import {
   IonTitle,
 } from "@ionic/react";
 import { currentGame, gameResult } from "../App";
-import { useHistory } from 'react-router';
+import { useHistory } from "react-router";
 
 interface PlayGameProps {
   addGameResult: (r: gameResult) => void;
@@ -25,37 +25,30 @@ interface PlayGameProps {
 }
 
 const PlayGame: React.FC<PlayGameProps> = ({
-  addGameResult
-  , currentGame
-  , previousPlayers
-  , setCurrentGame
-
+  addGameResult,
+  currentGame,
+  previousPlayers,
+  setCurrentGame,
 }) => {
-
   const nav = useHistory();
 
   const startGame = () => {
     // Setup the payers and the start timestamp.
     setCurrentGame({
-      start: new Date().toISOString()
-      , players: [
-        previousPlayers[0] 
-        , previousPlayers[1]
-        , "Marge"
-      ]
+      start: new Date().toISOString(),
+      players: [previousPlayers[0], previousPlayers[1], "Marge"],
     });
   };
 
   const endGame = () => {
-
     addGameResult({
-      start: currentGame.start
-      , end: new Date().toISOString()
-      , players: currentGame.players.map((x: any) => ({
-        name: x
-        , order: 0
-      }))
-      , winner: "Marge"
+      start: currentGame.start,
+      end: new Date().toISOString(),
+      players: currentGame.players.map((x: any) => ({
+        name: x,
+        order: 0,
+      })),
+      winner: "Marge",
     });
 
     nav.push("/");
@@ -67,15 +60,16 @@ const PlayGame: React.FC<PlayGameProps> = ({
         <IonHeader>
           <IonToolbar>
             <IonButtons slot="start">
-              <IonBackButton defaultHref='/players' />
+              <IonBackButton defaultHref="/players" />
             </IonButtons>
             <IonTitle>Back To Players</IonTitle>
           </IonToolbar>
-          
         </IonHeader>
         <IonContent>
-        <h1 className="ion-padding">Let's Get Scrabbling!</h1>
-          <IonButton className="ion-padding" onClick={startGame}>Start Game</IonButton>
+          <h1 className="ion-padding">Let's Get Scrabbling!</h1>
+          <IonButton className="ion-padding" onClick={startGame}>
+            Start Game
+          </IonButton>
           <IonCard>
             <IonCardContent>
               <IonCardHeader>Player 1: Me</IonCardHeader>
@@ -97,11 +91,10 @@ const PlayGame: React.FC<PlayGameProps> = ({
               </IonButtons>
             </IonCardContent>
           </IonCard>
-          <IonButton className="ion-padding" routerLink='/home'>Quit Game</IonButton>
-          <IonButton 
-            className="ion-padding"
-            onClick={endGame}
-          >
+          <IonButton className="ion-padding" routerLink="/home">
+            Quit Game
+          </IonButton>
+          <IonButton className="ion-padding" onClick={endGame}>
             End Game
           </IonButton>
         </IonContent>
