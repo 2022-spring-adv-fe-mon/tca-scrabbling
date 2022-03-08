@@ -20,6 +20,7 @@ interface player {
 
 const players: player[] = [];
 
+
 const AddPlayerModal: React.FC<{
   initialData: any;
   isOpen: boolean;
@@ -28,6 +29,8 @@ const AddPlayerModal: React.FC<{
   const [dataName, setDataName] = useState<string | null | undefined>(
     initialData.name
   );
+
+const [inputValue, setInputValue] = useState();
   return (
     <IonModal isOpen={isOpen}>
       <IonHeader>
@@ -38,10 +41,13 @@ const AddPlayerModal: React.FC<{
       <IonContent className="ion-padding">
         <IonItem>
           <IonLabel>Player Name: </IonLabel>
+       
+         
           <IonInput
             value={dataName}
-            onIonChange={(e) => setDataName(e.detail.value)}
-          ></IonInput>
+            onIonChange={e => setDataName(e.detail.value)}
+            />
+
         </IonItem>
         <IonButton
           onClick={() => {
