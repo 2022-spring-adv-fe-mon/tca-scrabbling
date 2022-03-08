@@ -24,7 +24,7 @@ const calculateWinningPercentage = (results: gameResult[], who: string) =>
   results.filter((x) => x.winner === who).length /
   results.filter(
     (x) => x.winner !== "~~None~~" && x.players.some((y) => y.name === who)
-  ).length;
+  ).length * 100;
 
 const calculateLongestGame = (r: gameResult[]) =>
   Math.max(...r.map((x) => Date.parse(x.end) - Date.parse(x.start)));

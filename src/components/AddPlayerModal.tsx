@@ -1,6 +1,6 @@
 /* Using with IonModal Component */
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import {
   IonModal,
   IonHeader,
@@ -28,7 +28,6 @@ const AddPlayerModal: React.FC<{
   const [dataName, setDataName] = useState<string | null | undefined>(
     initialData.name
   );
-  const pageRef = useRef();
   return (
     <IonModal isOpen={isOpen}>
       <IonHeader>

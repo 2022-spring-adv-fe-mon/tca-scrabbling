@@ -27,12 +27,15 @@ interface AddPlayerProps {
   setCurrentGame: (game: currentGame) => void;
 }
 
-const Players: React.FC<AddPlayerProps> = ({ previousPlayers }) => {
+const Players: React.FC<AddPlayerProps> = ({
+  previousPlayers
+}) => {
+
   const nav = useHistory();
 
-  const playersWithCheckBoolean = previousPlayers.map((x) => ({
-    name: x,
-    checked: false,
+  const playersWithCheckBoolean = previousPlayers.map(x => ({
+    name: x
+    , checked: false
   }));
 
   //track modal state
@@ -65,31 +68,28 @@ const Players: React.FC<AddPlayerProps> = ({ previousPlayers }) => {
         <IonContent>
           <IonCard className="ion-padding">
             <IonCardTitle className="ion-padding">Players</IonCardTitle>
-            <IonCardSubtitle className="ion-padding">
-              Select or Add Player
-            </IonCardSubtitle>
+            <IonCardSubtitle className='ion-padding'>Select or Add Player</IonCardSubtitle>
             <IonCardContent className="ion-padding">
-              <AddPlayerModal
-                isOpen={addPlayerModal}
-                initialData={{ ...player }}
-                onClose={onModalClose}
-              />
-
+            
+                <AddPlayerModal
+                  isOpen={addPlayerModal}
+                  initialData={{ ...player }}
+                  onClose={onModalClose}
+                />
+          
               <div>
-                {playersWithCheckBoolean.map((x) => (
-                  <p key={x.name}>
-                    {x.name} ({x.checked.toString()})
-                  </p>
-                ))}
+                {
+                playersWithCheckBoolean.map(x => <p key={x.name}>{x.name} ({x.checked.toString()})</p>)
+                }
                 <IonList>
-                  <IonItem>
-                    <IonCheckbox slot="start" />
-                    <IonLabel>Me</IonLabel>
-                  </IonItem>
-                  <IonItem>
-                    <IonCheckbox slot="start" />
+                        <IonItem>
+                            <IonCheckbox slot="start" />
+                            <IonLabel>Me</IonLabel>
+                        </IonItem>
+                <IonItem>
+                <IonCheckbox slot="start" />
                     <IonLabel>{player.name}</IonLabel>
-                  </IonItem>
+                </IonItem>
                 </IonList>
                 <div>
                   <pre>{modalResp && JSON.stringify(modalResp, null, 2)}</pre>
@@ -104,11 +104,9 @@ const Players: React.FC<AddPlayerProps> = ({ previousPlayers }) => {
               </IonButton>
             </IonCardContent>
           </IonCard>
-          <div className="ion-padding">
-            <IonButton routerLink="/playgame">Continue</IonButton>
-            <IonButton routerLink="/home" color="danger">
-              Cancel
-            </IonButton>
+                <div className='ion-padding'>
+          <IonButton routerLink="/playgame">Continue</IonButton>
+          <IonButton routerLink="/home" color="danger">Cancel</IonButton>
           </div>
         </IonContent>
       </IonPage>
